@@ -7,22 +7,9 @@ export const HeroSection = () => {
       <div className="relative z-10 max-w-4xl">
         
         <h1 className="text-5xl md:text-7xl font-black leading-[0.95] tracking-tight text-[#ed261a] mt-4 mb-6">
-          La basura no debería buscar el bote...<br />
-          ¡El bote debería buscar la basura!
+          Frase de gancho
         </h1>
         
-        <p className="text-base md:text-lg text-[#991b1b] max-w-2xl mx-auto leading-relaxed font-medium">
-          Mueve el cursor por la pantalla. Nuestro bote autónomo con IA rastrea, persigue y recoge los residuos antes de que contaminen tus instalaciones o las calles de la ciudad.
-        </p>
-        
-        <div className="mt-8 flex flex-wrap justify-center gap-3">
-          <a href="#persecucion" className="inline-flex items-center gap-2 px-6 py-3 bg-[#ed261a] text-white font-extrabold rounded-xl hover:bg-[#991b1b] transition shadow-md">
-            <Play className="w-4 h-4 fill-current" /> Probar persecución en vivo
-          </a>
-          <a href="#roi" className="px-6 py-3 bg-white border border-red-200 text-[#450a0a] font-bold rounded-xl hover:bg-[#fee2e2] transition">
-            Calcular ROI empresarial
-          </a>
-        </div>
       </div>
 
       <div className="relative z-10 grid grid-cols-1 sm:grid-cols-3 gap-3 max-w-4xl w-full mt-16 text-left">

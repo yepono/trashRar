@@ -45,9 +45,9 @@ export const TrashCan3DViewer = () => {
   const [revealProgress, setRevealProgress] = useState(0);
 
   const hotspots = [
-    { id: 1, title: 'LiDAR & Sensores Ópticos', desc: 'Detección espacial de personas y cúmulos de basura en un radio de 15 metros.', icon: <Eye className="w-5 h-5"/>, pos: 'top-10 left-10' },
-    { id: 2, title: 'Compactador Solar Interno', desc: 'Reduce el volumen de los residuos 5:1 mediante compresión automatizada por energía solar.', icon: <Zap className="w-5 h-5"/>, pos: 'top-1/2 right-10' },
-    { id: 3, title: 'Módulo de Navegación IoT', desc: 'Mapeo autónomo SLAM y sincronización en tiempo real con la nube empresarial.', icon: <Cpu className="w-5 h-5"/>, pos: 'bottom-10 left-1/4' },
+    { id: 1, title: 'Detector de basura', desc: 'Detecta a personas y cúmulos de basura en un radio amplio.', icon: <Eye className="w-5 h-5"/>, pos: 'top-10 left-10' },
+    { id: 2, title: 'Compresor integrado', desc: 'Reduce el volumen de los residuos mediante compresión automatizada.', icon: <Zap className="w-5 h-5"/>, pos: 'top-1/2 right-10' },
+    { id: 3, title: 'Reportes informativos', desc: 'Genera reportes de calor y estadisticas sobre los habitos de recolección dentro de la empresa.', icon: <Cpu className="w-5 h-5"/>, pos: 'bottom-10 left-1/4' },
   ];
 
   useEffect(() => {
@@ -70,15 +70,9 @@ export const TrashCan3DViewer = () => {
   return (
     <section id="anatomia" ref={sectionRef} className="py-24 px-6 max-w-7xl mx-auto relative min-h-[900px]">
       <div className="text-center mb-12">
-        <span className="bg-[#fee2e2] text-[#ed261a] border border-red-200 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-          Desglose de hardware
-        </span>
         <h2 className="text-3xl md:text-5xl font-black text-[#ed261a] mt-5 mb-4">
-          Anatomía de un trashRar
+          Anatomía de un TrashRar
         </h2>
-        <p className="text-[#991b1b] max-w-xl mx-auto font-medium">
-          Inspecciona el hardware inteligente que compone nuestro bote de basura autónomo.
-        </p>
       </div>
 
       <div className="sticky top-28 h-[560px] w-full max-w-4xl mx-auto bg-white border-2 border-red-200 rounded-3xl relative overflow-hidden shadow-md">
@@ -115,9 +109,6 @@ export const TrashCan3DViewer = () => {
             )}
           </div>
         ))}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-center text-[10px] uppercase tracking-[0.18em] text-[#991b1b] font-bold">
-          Desplázate para revelar el modelo · Haz clic en los nodos
-        </div>
       </div>
     </section>
   );

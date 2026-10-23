@@ -60,10 +60,10 @@ export const InteractiveStory = () => {
   ];
 
   const steps = [
-    'Paso 1: Da clic en cualquier parte de esta sección para generar basura simulada en el suelo.',
-    'Paso 2: El bote detecta la basura y comienza a perseguir tu cursor.',
-    'Paso 3: Haz clic en cada residuo para que el bote lo recoja.',
-    'Excelente. Las instalaciones están limpias y la métrica de eficiencia sube en tiempo real.',
+    'Paso 1: Da clic en cualquier parte de esta sección para generar basura.',
+    'Paso 2: El bote detecta la basura y comienza a perseguirte.',
+    'Paso 3: Haz clic en cada residuo para recogerlo y tirarlo en el bote de basura.',
+    'Excelente. Las instalaciones están limpias y la métrica de eficiencia subio en tiempo real.',
   ];
 
   useEffect(() => {
@@ -167,59 +167,32 @@ export const InteractiveStory = () => {
 
       {/* Encabezado de Sección */}
       <div className="text-center mb-10">
-        <span className="bg-[#fee2e2] text-[#ed261a] border border-red-200 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
-          Arena interactiva
-        </span>
         <h2 className="text-3xl md:text-5xl font-black text-[#ed261a] mt-5 mb-3">
-          Prueba la persecución del bote
+          La efectividad de TrashRar
         </h2>
-        <p className="text-[#991b1b] max-w-2xl mx-auto font-medium">
-          Haz clic en una zona libre para soltar basura. Después, encuentra y haz clic en cada partícula para que el bote la recoja.
-        </p>
         
-        {/* Contador de Recogidas y ECO */}
-        <div className="mt-6 inline-flex items-center gap-5 bg-white border border-red-200 px-5 py-3 rounded-xl text-xs font-mono font-bold shadow-sm">
-          <span className="text-[#ed261a]"><Trash2 className="inline w-4 h-4 mr-1" /> RECOGIDAS: <strong className="text-[#450a0a]">{score}</strong></span>
-          <span className="text-[#991b1b]"><Sparkles className="inline w-4 h-4 mr-1" /> ECO: <strong className="text-[#450a0a]">{ecoPoints}</strong></span>
-        </div>
-      </div>
-
-      {/* Sliders de Velocidad y Frecuencia */}
-      <div className="max-w-5xl mx-auto mb-10 grid md:grid-cols-2 gap-4 bg-white border border-red-200 rounded-2xl p-5 shadow-sm">
-        <label className="text-left text-xs text-[#991b1b] font-bold">
-          <span className="flex justify-between mb-2"><span>Velocidad de persecución</span><strong className="text-[#ed261a]">{Math.round(chaseSpeed * 100)}%</strong></span>
-          <input aria-label="Velocidad de persecución" type="range" min="0.03" max="0.16" step="0.005" value={chaseSpeed} onChange={(event) => setChaseSpeed(Number(event.target.value))} className="w-full accent-[#ed261a]" />
-        </label>
-        <label className="text-left text-xs text-[#991b1b] font-bold">
-          <span className="flex justify-between mb-2"><span>Frecuencia de basura por clic</span><strong className="text-[#ed261a]">{Math.round(trashChance * 100)}%</strong></span>
-          <input aria-label="Frecuencia de basura por clic" type="range" min="0.25" max="1" step="0.05" value={trashChance} onChange={(event) => setTrashChance(Number(event.target.value))} className="w-full accent-[#ed261a]" />
-        </label>
       </div>
 
       {/* Tarjetas de Pasos */}
       <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
         <div className="bg-white border border-red-200 p-6 rounded-2xl shadow-sm">
           <span className="text-[#ed261a] text-xs font-mono font-bold">01 / SOLTAR</span>
-          <h3 className="text-lg font-bold text-[#450a0a] mt-3">Suelta basura</h3>
-          <p className="text-sm text-[#991b1b] mt-2">Cada click sobre un espacio libre crea una partícula de basura.</p>
+          <h3 className="text-lg font-bold text-[#450a0a] mt-3">Una persona tira basura fuera de TrashRar</h3>
         </div>
         <div className="bg-white border border-red-200 p-6 rounded-2xl shadow-sm">
           <span className="text-[#ed261a] text-xs font-mono font-bold">02 / SEGUIR</span>
-          <h3 className="text-lg font-bold text-[#450a0a] mt-3">El bote te sigue</h3>
-          <p className="text-sm text-[#991b1b] mt-2">Sin residuos, el modelo espera en la esquina inferior derecha.</p>
+          <h3 className="text-lg font-bold text-[#450a0a] mt-3">TrashRar te sigue para que regreses a colocar la basura en su lugar</h3>
         </div>
         <div className="bg-white border border-red-200 p-6 rounded-2xl shadow-sm">
           <span className="text-[#ed261a] text-xs font-mono font-bold">03 / RECOGER</span>
-          <h3 className="text-lg font-bold text-[#450a0a] mt-3">Haz clic para recoger</h3>
-          <p className="text-sm text-[#991b1b] mt-2">Haz clic en cada icono para levantarlo y sumar impacto.</p>
+          <h3 className="text-lg font-bold text-[#450a0a] mt-3">Recoges la basura y la depositas en TrashRar</h3>
         </div>
       </div>
 
       {/* Caja de Estado */}
       <div className="max-w-2xl mx-auto text-center bg-white border-2 border-[#ed261a] rounded-3xl p-8 shadow-sm">
         <Sparkles className="w-8 h-8 text-[#ed261a] mx-auto mb-4" />
-        <p className="text-[#ed261a] text-xs font-mono font-bold uppercase tracking-widest mb-3">Estado de persecución</p>
-        <p className="text-[#450a0a] font-medium">{isChasing ? steps[activeStep] : 'Desplázate hacia esta sección para activar el modo de persecución.'}</p>
+        <p className="text-[#ed261a] text-xl font-mono font-bold uppercase tracking-widest mb-3">PLAYGROUND</p>
       </div>
     </section>
   );
