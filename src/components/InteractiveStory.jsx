@@ -16,7 +16,7 @@ function PursuitModel() {
   return (
     <group ref={groupRef}>
       <Center>
-        <Clone object={model} scale={[0.23, 0.23, 0.23]} />
+        <Clone object={model} scale={[1, 1, 1]} />
       </Center>
     </group>
   );
