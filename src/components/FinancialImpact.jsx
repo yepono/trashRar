@@ -2,16 +2,16 @@ import { Check, ShieldCheck } from 'lucide-react';
 
 export const FinancialImpact = () => {
   return (
-    <section id="roi" className="section-wash section-rule py-20 px-6 max-w-7xl mx-auto">
-      <div className="text-center max-w-3xl mx-auto mb-16">
+    <section id="roi" className="editorial-section editorial-section--right section-wash section-rule py-24 px-6">
+      <div className="editorial-heading mb-14">
         <span className="inline-flex rounded-full border border-[#b51414]/35 bg-[#b51414]/[0.06] px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#b51414]">El modelo de negocio</span>
         <h2 className="text-4xl md:text-5xl font-black text-[#820000] mt-4 mb-4">Adquiere TrashRar</h2>
-        <p className="text-[#b51414]">
+        <p className="max-w-xl text-[#b51414]">
           Suscripción todo incluido adaptada para mantener tu edificio impecable.
         </p>
       </div>
 
-      <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
+      <div className="grid md:grid-cols-2 gap-5 max-w-4xl">
         <div className="bg-[#fafafa] border-2 border-[#b51414] p-8 rounded-3xl flex flex-col justify-between shadow-[0_18px_50px_rgba(130,0,0,.1)] brand-reveal">
           <div>
             <h3 className="text-2xl font-bold text-[#820000] mb-2">Plan Enterprise RaaS</h3>

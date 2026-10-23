@@ -15,9 +15,47 @@ function ScrollDrivenModel({ rotation, interactive }) {
   return (
     <group ref={groupRef}>
       <Center>
-        <Clone object={model} scale={[2, 2, 2]} />
+        <Clone object={model} scale={[3.5, 3.5, 3.5]} />
       </Center>
     </group>
+  );
+}
+
+function TrashBinScene({ rotation, interactive }) {
+  const controlsRef = useRef();
+  const baseCameraPosition = useRef([0, 1.2, 7.5]);
+
+  useFrame(({ camera }) => {
+    if (!interactive) {
+      camera.position.lerp(
+        { x: baseCameraPosition.current[0], y: baseCameraPosition.current[1], z: baseCameraPosition.current[2] },
+        0.055,
+      );
+      if (controlsRef.current) {
+        controlsRef.current.target.lerp({ x: 0, y: 0, z: 0 }, 0.055);
+        controlsRef.current.update();
+      }
+    }
+  });
+
+  return (
+    <>
+      <ambientLight intensity={1.7} />
+      <directionalLight position={[3, 5, 4]} intensity={2.2} />
+      <pointLight position={[-3, 1, 2]} intensity={0.6} color="#e51010" />
+      <React.Suspense fallback={null}>
+        <ScrollDrivenModel rotation={rotation} interactive={interactive} />
+      </React.Suspense>
+      <OrbitControls
+        ref={controlsRef}
+        enabled={interactive}
+        enablePan
+        enableZoom
+        enableRotate
+        minDistance={4}
+        maxDistance={14}
+      />
+    </>
   );
 }
 
@@ -89,7 +127,10 @@ export const ScrollDrivenTrashBin = () => {
     };
   }, []);
 
-  const horizontalPosition = 8 + (84 * (0.5 - 0.5 * Math.cos(motion.progress * Math.PI * 4)));
+  const horizontalRangeStart = window.innerWidth <= 640 ? 30 : 24;
+  const horizontalRangeWidth = window.innerWidth <= 640 ? 40 : 52;
+  const horizontalPosition = horizontalRangeStart
+    + (horizontalRangeWidth * (0.5 - 0.5 * Math.cos(motion.progress * Math.PI * 4)));
   const verticalOffset = motion.reduced ? 0 : Math.sin(motion.progress * Math.PI * 4) * 4;
   const rotation = motion.reduced ? 0.18 : motion.progress * Math.PI * 8 + 0.18;
   const freePosition = {
@@ -116,21 +157,8 @@ export const ScrollDrivenTrashBin = () => {
       }}
     >
       <div className="scroll-trash-bin__glow" />
-      <Canvas camera={{ position: [0, 1.2, 4.8], fov: 42 }} dpr={[1, 1.5]}>
-        <ambientLight intensity={1.7} />
-        <directionalLight position={[3, 5, 4]} intensity={2.2} />
-        <pointLight position={[-3, 1, 2]} intensity={0.6} color="#e51010" />
-        <React.Suspense fallback={null}>
-          <ScrollDrivenModel rotation={rotation} interactive={motion.interactive} />
-        </React.Suspense>
-        <OrbitControls
-          enabled={motion.interactive}
-          enablePan
-          enableZoom
-          enableRotate
-          minDistance={3}
-          maxDistance={8}
-        />
+      <Canvas camera={{ position: [0, 1.2, 7.5], fov: 45, near: 0.1, far: 100 }} dpr={[1, 1.5]}>
+        <TrashBinScene rotation={rotation} interactive={motion.interactive} />
       </Canvas>
     </div>
   );

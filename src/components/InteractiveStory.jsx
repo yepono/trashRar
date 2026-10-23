@@ -19,10 +19,10 @@ export const InteractiveStory = () => {
 
   useEffect(() => {
     const updatePhase = () => {
-      const anatomy = document.getElementById('anatomia');
-      if (!anatomy || !sectionRef.current) return;
-      const anatomyBottom = anatomy.getBoundingClientRect().bottom + window.scrollY;
-      const active = window.scrollY > anatomyBottom - window.innerHeight * 0.55;
+      if (!sectionRef.current) return;
+      const sectionBounds = sectionRef.current.getBoundingClientRect();
+      const active = sectionBounds.top < window.innerHeight * 0.72
+        && sectionBounds.bottom > window.innerHeight * 0.28;
       setChaseActive(active);
       setIsChasing(active);
     };
@@ -66,7 +66,7 @@ export const InteractiveStory = () => {
   };
 
   return (
-    <section ref={sectionRef} id="persecucion" className="section-rule py-24 px-6 max-w-7xl mx-auto relative min-h-[760px]">
+    <section ref={sectionRef} id="persecucion" className="editorial-section editorial-section--left section-rule py-24 px-6 relative min-h-[760px]">
       {isChasing && trashItems.map((item) => (
         <div
           key={item.id}
@@ -88,16 +88,16 @@ export const InteractiveStory = () => {
       ))}
 
       {/* Encabezado de Sección */}
-      <div className="text-center mb-10">
+      <div className="editorial-heading mb-14">
         <span className="inline-flex rounded-full border border-[#b51414]/35 bg-[#b51414]/[0.06] px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#b51414]">La experiencia</span>
         <h2 className="text-3xl md:text-5xl font-black text-[#820000] mt-5 mb-3">
           La efectividad de TrashRar
         </h2>
-        <p className="max-w-xl mx-auto text-sm leading-relaxed text-[#b51414]">Una demostración breve de cómo la solución transforma un residuo fuera de lugar en una acción medible.</p>
+        <p className="max-w-xl text-sm leading-relaxed text-[#b51414]">Una demostración breve de cómo la solución transforma un residuo fuera de lugar en una acción medible.</p>
       </div>
 
       {/* Tarjetas de Pasos */}
-      <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
+      <div className="editorial-step-list grid gap-4 max-w-2xl mb-12">
         <div className="bg-[#fafafa] border border-[#b51414]/25 p-6 rounded-2xl shadow-[0_12px_30px_rgba(130,0,0,.08)] brand-reveal">
           <span className="text-[#e51010] text-xs font-mono font-bold">01 / SOLTAR</span>
           <h3 className="text-lg font-bold text-[#820000] mt-3">Una persona tira basura fuera de TrashRar</h3>
@@ -113,9 +113,19 @@ export const InteractiveStory = () => {
       </div>
 
       {/* Caja de Estado */}
-      <div className="max-w-2xl mx-auto text-center bg-[#fafafa] border-2 border-[#b51414] rounded-3xl p-8 shadow-[0_16px_40px_rgba(130,0,0,.1)] brand-pulse">
+      <div className="editorial-playground max-w-2xl text-left bg-[#fafafa] border-2 border-[#b51414] rounded-3xl p-8 shadow-[0_16px_40px_rgba(130,0,0,.1)] brand-pulse">
         <Sparkles className="w-8 h-8 text-[#e51010] mx-auto mb-4" />
         <p className="text-[#820000] text-xl font-mono font-bold uppercase tracking-widest mb-3">PLAYGROUND</p>
+        <p className="text-[#b51414] text-sm leading-relaxed">
+          {isChasing
+            ? 'Haz clic en cualquier espacio para dejar basura y después haz clic sobre cada montículo para recogerlo.'
+            : 'Desplázate hasta esta sección para activar el playground.'}
+        </p>
+        {isChasing && trashItems.length > 0 && (
+          <p className="mt-4 text-[#e51010] text-xs font-black uppercase tracking-[0.16em]">
+            Residuos pendientes: {trashItems.length}
+          </p>
+        )}
       </div>
     </section>
   );

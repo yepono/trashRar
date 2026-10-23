@@ -23,8 +23,9 @@ body {
   position: fixed;
   z-index: 10;
   top: 53%;
-  width: clamp(320px, 48vw, 640px);
-  height: clamp(320px, 48vw, 640px);
+  width: clamp(360px, 52vw, 760px);
+  height: clamp(360px, 52vw, 760px);
+  overflow: visible;
   pointer-events: none;
   opacity: 1;
   will-change: left, transform;
@@ -47,9 +48,9 @@ body {
 @media (max-width: 640px) {
   .scroll-trash-bin {
     top: 58%;
-    width: 280px;
-    height: 280px;
-    opacity: 0.22;
+    width: 320px;
+    height: 320px;
+    opacity: 1;
   }
 }
 
@@ -90,6 +91,48 @@ input {
 
 .section-wash {
   background: linear-gradient(180deg, rgba(181, 20, 20, 0.035), transparent 22%, transparent 78%, rgba(181, 20, 20, 0.035));
+}
+
+.editorial-section {
+  width: min(100%, 1180px);
+  margin-inline: auto;
+}
+
+.editorial-section--left {
+  padding-right: clamp(1.5rem, 14vw, 12rem);
+}
+
+.editorial-section--right {
+  padding-left: clamp(1.5rem, 14vw, 12rem);
+}
+
+.editorial-heading {
+  max-width: 44rem;
+  text-align: left;
+}
+
+.editorial-heading h2 {
+  max-width: 36rem;
+  font-size: clamp(2.25rem, 5vw, 4.5rem);
+  line-height: 0.98;
+  letter-spacing: -0.045em;
+}
+
+.editorial-step-list > div,
+.editorial-section .grid > div {
+  box-shadow: 0 12px 30px rgba(130, 0, 0, 0.05);
+}
+
+@media (max-width: 768px) {
+  .editorial-section--left,
+  .editorial-section--right {
+    padding-inline: 1.5rem;
+  }
+
+  .editorial-heading,
+  .editorial-playground {
+    text-align: left;
+  }
 }
 
 .section-rule {
