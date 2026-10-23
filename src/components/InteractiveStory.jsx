@@ -1,9 +1,16 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { Canvas, useFrame } from '@react-three/fiber';
 import { Center, Clone, useGLTF } from '@react-three/drei';
-import { Box, CupSoda, FileText, Package, Sparkles, Trash2 } from 'lucide-react';
+import { Box, CupSoda, FileText, Package, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useTrashStore } from '../store/useTrashStore';
+
+const trashTypes = [
+  { name: 'Botella', Icon: CupSoda },
+  { name: 'Paquete', Icon: Package },
+  { name: 'Caja', Icon: Box },
+  { name: 'Papel', Icon: FileText },
+];
 
 function PursuitModel() {
   const groupRef = useRef();
@@ -42,29 +49,15 @@ function PursuitBin({ position }) {
 }
 
 export const InteractiveStory = () => {
-  const { score, ecoPoints, incrementScore, incrementEcoPoints, trashItems, addTrashItem, removeTrashItem, setIsChasing } = useTrashStore();
+  const { incrementScore, incrementEcoPoints, trashItems, addTrashItem, removeTrashItem, setIsChasing } = useTrashStore();
   const sectionRef = useRef(null);
   const binPositionRef = useRef({ x: window.innerWidth - 90, y: window.innerHeight - 110 });
   const targetPositionRef = useRef({ x: window.innerWidth - 90, y: window.innerHeight - 110 });
-  const [binPosition, setBinPosition] = useState(binPositionRef.current);
+  const [binPosition, setBinPosition] = useState({ x: window.innerWidth - 90, y: window.innerHeight - 110 });
   const [isChasing, setChaseActive] = useState(false);
-  const [activeStep, setActiveStep] = useState(0);
-  const [chaseSpeed, setChaseSpeed] = useState(0.075);
-  const [trashChance, setTrashChance] = useState(1);
-
-  const trashTypes = [
-    { name: 'Botella', Icon: CupSoda },
-    { name: 'Paquete', Icon: Package },
-    { name: 'Caja', Icon: Box },
-    { name: 'Papel', Icon: FileText },
-  ];
-
-  const steps = [
-    'Paso 1: Da clic en cualquier parte de esta sección para generar basura.',
-    'Paso 2: El bote detecta la basura y comienza a perseguirte.',
-    'Paso 3: Haz clic en cada residuo para recogerlo y tirarlo en el bote de basura.',
-    'Excelente. Las instalaciones están limpias y la métrica de eficiencia subio en tiempo real.',
-  ];
+  const [, setActiveStep] = useState(0);
+  const [chaseSpeed] = useState(0.075);
+  const [trashChance] = useState(1);
 
   useEffect(() => {
     const updatePhase = () => {
@@ -139,7 +132,7 @@ export const InteractiveStory = () => {
   };
 
   return (
-    <section ref={sectionRef} id="persecucion" className="py-24 px-6 max-w-7xl mx-auto relative min-h-[760px]">
+    <section ref={sectionRef} id="persecucion" className="section-rule py-24 px-6 max-w-7xl mx-auto relative min-h-[760px]">
       {isChasing && <PursuitBin position={binPosition} />}
 
       {isChasing && trashItems.map((item) => (
@@ -155,44 +148,42 @@ export const InteractiveStory = () => {
           onKeyDown={(event) => {
             if (event.key === 'Enter' || event.key === ' ') collectTrash(event);
           }}
-          className="fixed z-50 -translate-x-1/2 -translate-y-1/2 cursor-pointer text-2xl sm:text-3xl drop-shadow-md transition-transform hover:scale-125"
+          className="fixed z-50 -translate-x-1/2 -translate-y-1/2 cursor-pointer transition-transform hover:scale-110 brand-float"
           style={{ left: item.x, top: item.y }}
         >
-          {(() => {
-            const trashType = trashTypes.find((type) => type.name === item.trashType) || trashTypes[0];
-            return <trashType.Icon aria-label={trashType.name} className="w-8 h-8 text-[#ed261a]" />;
-          })()}
+          <img src="/trash-pile.svg" alt="Montículo de basura" className="w-20 h-auto drop-shadow-[0_10px_12px_rgba(130,0,0,.24)]" />
         </div>
       ))}
 
       {/* Encabezado de Sección */}
       <div className="text-center mb-10">
-        <h2 className="text-3xl md:text-5xl font-black text-[#ed261a] mt-5 mb-3">
+        <span className="inline-flex rounded-full border border-[#b51414]/35 bg-[#b51414]/[0.06] px-4 py-2 text-[11px] font-black uppercase tracking-[0.2em] text-[#b51414]">La experiencia</span>
+        <h2 className="text-3xl md:text-5xl font-black text-[#820000] mt-5 mb-3">
           La efectividad de TrashRar
         </h2>
-        
+        <p className="max-w-xl mx-auto text-sm leading-relaxed text-[#b51414]">Una demostración breve de cómo la solución transforma un residuo fuera de lugar en una acción medible.</p>
       </div>
 
       {/* Tarjetas de Pasos */}
       <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
-        <div className="bg-white border border-red-200 p-6 rounded-2xl shadow-sm">
-          <span className="text-[#ed261a] text-xs font-mono font-bold">01 / SOLTAR</span>
-          <h3 className="text-lg font-bold text-[#450a0a] mt-3">Una persona tira basura fuera de TrashRar</h3>
+        <div className="bg-[#fafafa] border border-[#b51414]/25 p-6 rounded-2xl shadow-[0_12px_30px_rgba(130,0,0,.08)] brand-reveal">
+          <span className="text-[#e51010] text-xs font-mono font-bold">01 / SOLTAR</span>
+          <h3 className="text-lg font-bold text-[#820000] mt-3">Una persona tira basura fuera de TrashRar</h3>
         </div>
-        <div className="bg-white border border-red-200 p-6 rounded-2xl shadow-sm">
-          <span className="text-[#ed261a] text-xs font-mono font-bold">02 / SEGUIR</span>
-          <h3 className="text-lg font-bold text-[#450a0a] mt-3">TrashRar te sigue para que regreses a colocar la basura en su lugar</h3>
+        <div className="bg-[#fafafa] border border-[#b51414]/25 p-6 rounded-2xl shadow-[0_12px_30px_rgba(130,0,0,.08)] brand-reveal">
+          <span className="text-[#e51010] text-xs font-mono font-bold">02 / SEGUIR</span>
+          <h3 className="text-lg font-bold text-[#820000] mt-3">TrashRar te sigue para que regreses a colocar la basura en su lugar</h3>
         </div>
-        <div className="bg-white border border-red-200 p-6 rounded-2xl shadow-sm">
-          <span className="text-[#ed261a] text-xs font-mono font-bold">03 / RECOGER</span>
-          <h3 className="text-lg font-bold text-[#450a0a] mt-3">Recoges la basura y la depositas en TrashRar</h3>
+        <div className="bg-[#fafafa] border border-[#b51414]/25 p-6 rounded-2xl shadow-[0_12px_30px_rgba(130,0,0,.08)] brand-reveal">
+          <span className="text-[#e51010] text-xs font-mono font-bold">03 / RECOGER</span>
+          <h3 className="text-lg font-bold text-[#820000] mt-3">Recoges la basura y la depositas en TrashRar</h3>
         </div>
       </div>
 
       {/* Caja de Estado */}
-      <div className="max-w-2xl mx-auto text-center bg-white border-2 border-[#ed261a] rounded-3xl p-8 shadow-sm">
-        <Sparkles className="w-8 h-8 text-[#ed261a] mx-auto mb-4" />
-        <p className="text-[#ed261a] text-xl font-mono font-bold uppercase tracking-widest mb-3">PLAYGROUND</p>
+      <div className="max-w-2xl mx-auto text-center bg-[#fafafa] border-2 border-[#b51414] rounded-3xl p-8 shadow-[0_16px_40px_rgba(130,0,0,.1)] brand-pulse">
+        <Sparkles className="w-8 h-8 text-[#e51010] mx-auto mb-4" />
+        <p className="text-[#820000] text-xl font-mono font-bold uppercase tracking-widest mb-3">PLAYGROUND</p>
       </div>
     </section>
   );

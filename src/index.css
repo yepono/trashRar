@@ -1,5 +1,73 @@
 @import 'tailwindcss';
 
+:root {
+  --brand-deep: #820000;
+  --brand-red: #b51414;
+  --brand-accent: #e51010;
+  --brand-paper: #fafafa;
+  --brand-ink: #2b0909;
+  color: var(--brand-ink);
+  background: var(--brand-paper);
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+}
+
 body {
   margin: 0;
+  min-width: 320px;
+  background: var(--brand-paper);
+}
+
+button,
+a,
+input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+@keyframes rise-in {
+  from { opacity: 0; transform: translateY(24px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes soft-float {
+  0%, 100% { transform: translateY(0) rotate(-2deg); }
+  50% { transform: translateY(-8px) rotate(2deg); }
+}
+
+@keyframes pulse-ring {
+  0%, 100% { box-shadow: 0 0 0 0 rgba(229, 16, 16, .24); }
+  50% { box-shadow: 0 0 0 14px rgba(229, 16, 16, 0); }
+}
+
+.brand-reveal { animation: rise-in .7s cubic-bezier(.2,.8,.2,1) both; }
+.brand-float { animation: soft-float 3.4s ease-in-out infinite; }
+.brand-pulse { animation: pulse-ring 2.4s ease-in-out infinite; }
+
+.brand-reveal:nth-child(2) { animation-delay: 120ms; }
+.brand-reveal:nth-child(3) { animation-delay: 240ms; }
+.brand-reveal:nth-child(4) { animation-delay: 360ms; }
+
+.section-wash {
+  background: linear-gradient(180deg, rgba(181, 20, 20, 0.035), transparent 22%, transparent 78%, rgba(181, 20, 20, 0.035));
+}
+
+.section-rule {
+  position: relative;
+}
+
+.section-rule::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 50%;
+  width: min(92%, 1120px);
+  height: 1px;
+  transform: translateX(-50%);
+  background: linear-gradient(90deg, transparent, rgba(181, 20, 20, 0.28), transparent);
+}
+
+::selection {
+  background: var(--brand-accent);
+  color: var(--brand-paper);
 }
