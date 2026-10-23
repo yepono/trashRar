@@ -19,6 +19,46 @@ body {
   background: var(--brand-paper);
 }
 
+.scroll-trash-bin {
+  position: fixed;
+  z-index: 10;
+  top: 53%;
+  width: clamp(320px, 48vw, 640px);
+  height: clamp(320px, 48vw, 640px);
+  pointer-events: none;
+  opacity: 1;
+  will-change: left, transform;
+  transition: opacity 180ms ease-out;
+}
+
+.scroll-trash-bin__glow {
+  position: absolute;
+  inset: 18%;
+  border-radius: 50%;
+  background: radial-gradient(circle, rgba(229, 16, 16, 0.24), transparent 68%);
+  filter: blur(18px);
+}
+
+.scroll-trash-bin--interactive {
+  pointer-events: auto;
+  z-index: 30;
+}
+
+@media (max-width: 640px) {
+  .scroll-trash-bin {
+    top: 58%;
+    width: 280px;
+    height: 280px;
+    opacity: 0.22;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .scroll-trash-bin {
+    transition: none;
+  }
+}
+
 button,
 a,
 input {

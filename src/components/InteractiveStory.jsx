@@ -1,6 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
-import { Canvas, useFrame } from '@react-three/fiber';
-import { Center, Clone, useGLTF } from '@react-three/drei';
+import { useEffect, useRef, useState } from 'react';
 import { Box, CupSoda, FileText, Package, Sparkles } from 'lucide-react';
 import confetti from 'canvas-confetti';
 import { useTrashStore } from '../store/useTrashStore';
@@ -12,51 +10,11 @@ const trashTypes = [
   { name: 'Papel', Icon: FileText },
 ];
 
-function PursuitModel() {
-  const groupRef = useRef();
-  const { scene: model } = useGLTF('/models/trashbin1objeto.glb');
-
-  useFrame((state) => {
-    if (groupRef.current) groupRef.current.rotation.y = state.clock.getElapsedTime() * 0.55;
-  });
-
-  return (
-    <group ref={groupRef}>
-      <Center>
-        <Clone object={model} scale={[1, 1, 1]} />
-      </Center>
-    </group>
-  );
-}
-
-function PursuitBin({ position }) {
-  return (
-    <div
-      data-pursuit-bin
-      className="fixed z-40 w-36 h-36 -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-[left,top] duration-75"
-      style={{ left: position.x, top: position.y }}
-    >
-      <div className="absolute inset-0 rounded-full bg-red-500/20 blur-xl animate-pulse" />
-      <Canvas camera={{ position: [0, 1.2, 4], fov: 45 }}>
-        <ambientLight intensity={1.5} />
-        <directionalLight position={[3, 5, 4]} intensity={2} />
-        <React.Suspense fallback={null}>
-          <PursuitModel />
-        </React.Suspense>
-      </Canvas>
-    </div>
-  );
-}
-
 export const InteractiveStory = () => {
   const { incrementScore, incrementEcoPoints, trashItems, addTrashItem, removeTrashItem, setIsChasing } = useTrashStore();
   const sectionRef = useRef(null);
-  const binPositionRef = useRef({ x: window.innerWidth - 90, y: window.innerHeight - 110 });
-  const targetPositionRef = useRef({ x: window.innerWidth - 90, y: window.innerHeight - 110 });
-  const [binPosition, setBinPosition] = useState({ x: window.innerWidth - 90, y: window.innerHeight - 110 });
   const [isChasing, setChaseActive] = useState(false);
   const [, setActiveStep] = useState(0);
-  const [chaseSpeed] = useState(0.075);
   const [trashChance] = useState(1);
 
   useEffect(() => {
@@ -69,39 +27,15 @@ export const InteractiveStory = () => {
       setIsChasing(active);
     };
 
-    const handleMouseMove = (event) => {
-      if (trashItems.length > 0) {
-        targetPositionRef.current = { x: event.clientX, y: event.clientY };
-      }
-    };
-
     updatePhase();
     window.addEventListener('scroll', updatePhase, { passive: true });
     window.addEventListener('resize', updatePhase);
-    window.addEventListener('mousemove', handleMouseMove);
     return () => {
       window.removeEventListener('scroll', updatePhase);
       window.removeEventListener('resize', updatePhase);
-      window.removeEventListener('mousemove', handleMouseMove);
       setIsChasing(false);
     };
-  }, [setIsChasing, trashItems.length]);
-
-  useEffect(() => {
-    let frameId;
-    const animateBin = () => {
-      const current = binPositionRef.current;
-      const target = trashItems.length > 0
-        ? targetPositionRef.current
-        : { x: window.innerWidth - 72, y: window.innerHeight - 92 };
-      current.x += (target.x - current.x) * chaseSpeed;
-      current.y += (target.y - current.y) * chaseSpeed;
-      setBinPosition({ x: current.x, y: current.y });
-      frameId = requestAnimationFrame(animateBin);
-    };
-    frameId = requestAnimationFrame(animateBin);
-    return () => cancelAnimationFrame(frameId);
-  }, [chaseSpeed, trashItems.length]);
+  }, [setIsChasing]);
 
   useEffect(() => {
     if (!isChasing) return undefined;
@@ -133,8 +67,6 @@ export const InteractiveStory = () => {
 
   return (
     <section ref={sectionRef} id="persecucion" className="section-rule py-24 px-6 max-w-7xl mx-auto relative min-h-[760px]">
-      {isChasing && <PursuitBin position={binPosition} />}
-
       {isChasing && trashItems.map((item) => (
         <div
           key={item.id}
