@@ -29,7 +29,8 @@ function PursuitBin({ position }) {
       className="fixed z-40 w-36 h-36 -translate-x-1/2 -translate-y-1/2 pointer-events-none transition-[left,top] duration-75"
       style={{ left: position.x, top: position.y }}
     >
-      <div className="absolute inset-0 rounded-full bg-emerald-500/20 blur-xl animate-pulse" />
+      {/* Resplandor del bote flotante en color rojo */}
+      <div className="absolute inset-0 rounded-full bg-red-600/25 blur-xl animate-pulse" />
       <Canvas camera={{ position: [0, 1.2, 4], fov: 45 }}>
         <ambientLight intensity={1.5} />
         <directionalLight position={[3, 5, 4]} intensity={2} />
@@ -153,9 +154,9 @@ export const InteractiveStory = () => {
             collectTrash(item);
           }}
           onKeyDown={(event) => {
-            if (event.key === 'Enter' || event.key === ' ') collectTrash(item);
+            if (event.key === 'Enter' || event.key === ' ') collectTrash(event);
           }}
-          className="fixed z-50 -translate-x-1/2 -translate-y-1/2 cursor-pointer text-2xl sm:text-3xl drop-shadow-[0_0_10px_rgba(251,191,36,0.55)] transition-transform hover:scale-125"
+          className="fixed z-50 -translate-x-1/2 -translate-y-1/2 cursor-pointer text-2xl sm:text-3xl drop-shadow-[0_0_10px_rgba(237,38,26,0.6)] transition-transform hover:scale-125"
           style={{ left: item.x, top: item.y }}
         >
           {(() => {
@@ -166,47 +167,49 @@ export const InteractiveStory = () => {
       ))}
 
       <div className="text-center mb-10">
-        <span className="bg-emerald-500/10 text-emerald-400 border border-emerald-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">Arena interactiva</span>
+        <span className="bg-red-500/10 text-red-400 border border-red-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">
+          Arena interactiva
+        </span>
         <h2 className="text-3xl md:text-5xl font-black text-white mt-5 mb-3">Prueba la persecución del bote</h2>
         <p className="text-slate-400 max-w-2xl mx-auto">Haz clic en una zona libre para soltar basura. Después, encuentra y haz clic en cada partícula para que el bote la recoja.</p>
         <div className="mt-6 inline-flex items-center gap-5 bg-slate-900 border border-slate-800 px-5 py-3 rounded-xl text-xs font-mono">
-          <span className="text-emerald-400"><Trash2 className="inline w-4 h-4 mr-1" /> RECOGIDAS: <strong className="text-white">{score}</strong></span>
-          <span className="text-teal-300"><Sparkles className="inline w-4 h-4 mr-1" /> ECO: <strong className="text-white">{ecoPoints}</strong></span>
+          <span className="text-red-500"><Trash2 className="inline w-4 h-4 mr-1" /> RECOGIDAS: <strong className="text-white">{score}</strong></span>
+          <span className="text-orange-400"><Sparkles className="inline w-4 h-4 mr-1" /> ECO: <strong className="text-white">{ecoPoints}</strong></span>
         </div>
       </div>
 
       <div className="max-w-5xl mx-auto mb-10 grid md:grid-cols-2 gap-4 bg-slate-950 border border-slate-800 rounded-2xl p-5">
         <label className="text-left text-xs text-slate-400">
-          <span className="flex justify-between mb-2"><span>Velocidad de persecución</span><strong className="text-emerald-400">{Math.round(chaseSpeed * 100)}%</strong></span>
-          <input aria-label="Velocidad de persecución" type="range" min="0.03" max="0.16" step="0.005" value={chaseSpeed} onChange={(event) => setChaseSpeed(Number(event.target.value))} className="w-full accent-emerald-500" />
+          <span className="flex justify-between mb-2"><span>Velocidad de persecución</span><strong className="text-red-500">{Math.round(chaseSpeed * 100)}%</strong></span>
+          <input aria-label="Velocidad de persecución" type="range" min="0.03" max="0.16" step="0.005" value={chaseSpeed} onChange={(event) => setChaseSpeed(Number(event.target.value))} className="w-full accent-red-600" />
         </label>
         <label className="text-left text-xs text-slate-400">
-          <span className="flex justify-between mb-2"><span>Frecuencia de basura por clic</span><strong className="text-emerald-400">{Math.round(trashChance * 100)}%</strong></span>
-          <input aria-label="Frecuencia de basura por clic" type="range" min="0.25" max="1" step="0.05" value={trashChance} onChange={(event) => setTrashChance(Number(event.target.value))} className="w-full accent-emerald-500" />
+          <span className="flex justify-between mb-2"><span>Frecuencia de basura por clic</span><strong className="text-red-500">{Math.round(trashChance * 100)}%</strong></span>
+          <input aria-label="Frecuencia de basura por clic" type="range" min="0.25" max="1" step="0.05" value={trashChance} onChange={(event) => setTrashChance(Number(event.target.value))} className="w-full accent-red-600" />
         </label>
       </div>
 
       <div className="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto mb-10">
-        <div className="bg-slate-900/70 border border-emerald-500/20 p-6 rounded-2xl">
-          <span className="text-emerald-400 text-xs font-mono">01 / SOLTAR</span>
+        <div className="bg-slate-900/70 border border-red-500/20 p-6 rounded-2xl">
+          <span className="text-red-500 text-xs font-mono">01 / SOLTAR</span>
           <h3 className="text-lg font-bold text-white mt-3">Suelta basura</h3>
           <p className="text-sm text-slate-400 mt-2">Cada click sobre un espacio libre crea una partícula de basura.</p>
         </div>
-        <div className="bg-slate-900/70 border border-emerald-500/20 p-6 rounded-2xl">
-          <span className="text-emerald-400 text-xs font-mono">02 / SEGUIR</span>
+        <div className="bg-slate-900/70 border border-red-500/20 p-6 rounded-2xl">
+          <span className="text-red-500 text-xs font-mono">02 / SEGUIR</span>
           <h3 className="text-lg font-bold text-white mt-3">El bote te sigue</h3>
           <p className="text-sm text-slate-400 mt-2">Sin residuos, el modelo espera en la esquina inferior derecha.</p>
         </div>
-        <div className="bg-slate-900/70 border border-emerald-500/20 p-6 rounded-2xl">
-          <span className="text-emerald-400 text-xs font-mono">03 / RECOGER</span>
+        <div className="bg-slate-900/70 border border-red-500/20 p-6 rounded-2xl">
+          <span className="text-red-500 text-xs font-mono">03 / RECOGER</span>
           <h3 className="text-lg font-bold text-white mt-3">Haz clic para recoger</h3>
           <p className="text-sm text-slate-400 mt-2">Haz clic en cada icono para levantarlo y sumar impacto.</p>
         </div>
       </div>
 
-      <div className="max-w-2xl mx-auto text-center bg-slate-950 border border-emerald-500/30 rounded-3xl p-8">
-        <Sparkles className="w-8 h-8 text-emerald-400 mx-auto mb-4" />
-        <p className="text-emerald-400 text-xs font-mono uppercase tracking-widest mb-3">Estado de persecución</p>
+      <div className="max-w-2xl mx-auto text-center bg-slate-950 border border-red-500/30 rounded-3xl p-8">
+        <Sparkles className="w-8 h-8 text-red-500 mx-auto mb-4" />
+        <p className="text-red-500 text-xs font-mono uppercase tracking-widest mb-3">Estado de persecución</p>
         <p className="text-slate-300">{isChasing ? steps[activeStep] : 'Desplázate hacia esta sección para activar el modo de persecución.'}</p>
       </div>
     </section>

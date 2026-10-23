@@ -9,7 +9,7 @@ import { TechnicalSupport } from './components/TechnicalSupport';
 
 export default function App() {
   return (
-    <div className="bg-slate-950 text-slate-100 min-h-screen selection:bg-emerald-500 selection:text-slate-950 font-sans overflow-x-hidden">
+    <div className="bg-slate-950 text-slate-100 min-h-screen selection:bg-[#ed261a] selection:text-white font-sans overflow-x-hidden">
       <Navbar />
       <HeroSection />
       <TrashCan3DViewer />
