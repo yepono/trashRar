@@ -23,7 +23,6 @@ function Model() {
   );
 }
 
-// Fallback visual si el modelo no está disponible (con color rojo)
 function FallbackBin() {
   const meshRef = useRef();
   useFrame((state) => {
@@ -34,7 +33,7 @@ function FallbackBin() {
   return (
     <mesh ref={meshRef}>
       <cylinderGeometry args={[1, 0.8, 2.5, 32]} />
-      <meshStandardMaterial color="#ed261a" metalness={0.8} roughness={0.2} />
+      <meshStandardMaterial color="#820000" metalness={0.8} roughness={0.2} />
     </mesh>
   );
 }
@@ -70,18 +69,18 @@ export const TrashCan3DViewer = () => {
   return (
     <section id="anatomia" ref={sectionRef} className="py-24 px-6 max-w-7xl mx-auto relative min-h-[900px]">
       <div className="text-center mb-12">
-        <span className="bg-[#fee2e2] text-[#ed261a] border border-red-200 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+        <span className="bg-[#fafafa] text-[#e51010] border border-[#b51414]/20 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
           Desglose de hardware
         </span>
-        <h2 className="text-3xl md:text-5xl font-black text-[#ed261a] mt-5 mb-4">
+        <h2 className="text-3xl md:text-5xl font-black text-[#820000] mt-5 mb-4">
           Anatomía de un trashRar
         </h2>
-        <p className="text-[#991b1b] max-w-xl mx-auto font-medium">
+        <p className="text-[#b51414] max-w-xl mx-auto font-medium">
           Inspecciona el hardware inteligente que compone nuestro bote de basura autónomo.
         </p>
       </div>
 
-      <div className="sticky top-28 h-[560px] w-full max-w-4xl mx-auto bg-white border-2 border-red-200 rounded-3xl relative overflow-hidden shadow-md">
+      <div className="sticky top-28 h-[560px] w-full max-w-4xl mx-auto bg-[#fafafa] border-2 border-[#b51414] rounded-3xl relative overflow-hidden shadow-md">
         <div
           className="absolute inset-0 transition-[transform,opacity] duration-100 ease-out"
           style={{ opacity: revealProgress, transform: `translateY(${(1 - revealProgress) * 170}px) scale(${0.7 + revealProgress * 0.3})` }}
@@ -97,25 +96,24 @@ export const TrashCan3DViewer = () => {
           </Canvas>
         </div>
 
-        {/* Hotspots interactivos sobre el Canvas */}
         {hotspots.map((spot) => (
           <div key={spot.id} className={`absolute ${spot.pos} z-10`}>
             <button
               aria-label={`Inspeccionar ${spot.title}`}
               onClick={() => setActiveHotspot(activeHotspot === spot.id ? null : spot.id)}
-              className="bg-[#ed261a] text-white p-3 rounded-full shadow-md hover:scale-110 hover:bg-[#991b1b] transition flex items-center justify-center font-bold"
+              className="bg-[#b51414] text-white p-3 rounded-full shadow-md hover:scale-110 hover:bg-[#e51010] transition flex items-center justify-center font-bold"
             >
               {spot.icon}
             </button>
             {activeHotspot === spot.id && (
-              <div className={`absolute z-20 w-56 max-w-[calc(100vw-3rem)] bg-white border-2 border-[#ed261a] p-4 rounded-xl shadow-lg text-left ${spot.id === 2 ? 'top-0 right-14' : spot.id === 3 ? 'bottom-14 left-0' : 'top-14 left-0'}`}>
-                <h4 className="text-[#ed261a] font-bold text-sm mb-1">{spot.title}</h4>
-                <p className="text-[#450a0a] text-xs font-medium">{spot.desc}</p>
+              <div className={`absolute z-20 w-56 max-w-[calc(100vw-3rem)] bg-[#fafafa] border-2 border-[#820000] p-4 rounded-xl shadow-lg text-left ${spot.id === 2 ? 'top-0 right-14' : spot.id === 3 ? 'bottom-14 left-0' : 'top-14 left-0'}`}>
+                <h4 className="text-[#820000] font-bold text-sm mb-1">{spot.title}</h4>
+                <p className="text-[#b51414] text-xs font-medium">{spot.desc}</p>
               </div>
             )}
           </div>
         ))}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-center text-[10px] uppercase tracking-[0.18em] text-[#991b1b] font-bold">
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-center text-[10px] uppercase tracking-[0.18em] text-[#b51414] font-bold">
           Desplázate para revelar el modelo · Haz clic en los nodos
         </div>
       </div>

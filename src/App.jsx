@@ -9,7 +9,7 @@ import { TechnicalSupport } from './components/TechnicalSupport';
 
 export default function App() {
   return (
-    <div className="bg-[#f8fafc] text-[#450a0a] min-h-screen selection:bg-[#ed261a] selection:text-white font-sans overflow-x-hidden">
+    <div className="bg-[#fafafa] text-[#b51414] min-h-screen selection:bg-[#820000] selection:text-white font-sans overflow-x-hidden">
       <Navbar />
       <HeroSection />
       <TrashCan3DViewer />
@@ -18,7 +18,7 @@ export default function App() {
       <FinancialImpact />
       <TechnicalSupport />
       
-      <footer className="py-12 px-6 text-center border-t border-red-200 text-[#991b1b] text-sm bg-white">
+      <footer className="py-12 px-6 text-center border-t border-[#b51414]/20 text-[#820000] text-sm bg-[#fafafa]">
         <p>© 2026 trashRar. Todos los derechos reservados. Con trashRar, la basura va en su lugar.</p>
       </footer>
     </div>

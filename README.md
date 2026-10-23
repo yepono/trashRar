@@ -20,7 +20,7 @@ Paleta Simplificada en Código (6 Colores Sólidos)
 
 #ffffff: Fondo de tarjetas y contenedores (Blanco puro)
 
-#ed261a: Rojo principal (Logo, títulos, hovers, tarjetas activas y botones primarios)
+#820000: Rojo principal (Logo, títulos, hovers, tarjetas activas y botones primarios)
 
 #450a0a: Rojo muy oscuro (Tipografía principal de lectura)
 
