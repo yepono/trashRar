@@ -6,34 +6,38 @@ export const Navbar = () => {
   const { score, ecoPoints } = useTrashStore();
 
   return (
-    <nav className="fixed top-4 left-1/2 -translate-x-1/2 z-50 w-[calc(100%-2rem)] max-w-6xl bg-slate-900/85 backdrop-blur-xl border border-red-500/30 px-4 sm:px-6 py-3 rounded-2xl sm:rounded-full flex flex-wrap items-center justify-between gap-3 shadow-2xl shadow-red-950/30">
+    <nav className="fixed top-0 left-0 z-50 w-full bg-white/90 backdrop-blur-xl border-b border-red-200 px-6 sm:px-10 py-3.5 flex items-center justify-between shadow-sm">
+      {/* Contenedor del Logo y Eslogan */}
       <div className="flex items-center space-x-3">
-        {/* Contenedor del Logo con rojo primario */}
-        <div className="bg-[#ed261a] p-2 rounded-lg text-white shadow-lg shadow-red-600/30">
-          <Trash2 className="w-5 h-5 animate-pulse" />
+        <div className="bg-[#ed261a] p-2 rounded-lg text-white">
+          <Trash2 className="w-5 h-5" />
         </div>
         <div>
-          <span className="text-lg font-black tracking-wider text-white">
-            trash<span className="text-[#ed261a]">Rar</span>
+          <span className="text-xl font-black tracking-wider text-[#ed261a] block leading-none">
+            trashRar
           </span>
-          <p className="text-[10px] text-slate-400 hidden sm:block">SISTEMA DE LIMPIEZA ACTIVA</p>
+          <p className="text-[10px] text-[#ed261a] font-bold uppercase tracking-wider mt-0.5 hidden sm:block">
+            LA BASURA EN SU LUGAR
+          </p>
         </div>
       </div>
 
-      <div className="flex items-center gap-3 sm:gap-5 text-[10px] sm:text-xs font-mono">
-        <div className="flex items-center gap-1.5 text-red-500">
-          <Trash2 className="w-3.5 h-3.5" />
-          <span>RECOGIDAS: <strong className="text-white">{score}</strong></span>
+      {/* Métricas e Indicadores en tiempo real */}
+      <div className="flex items-center gap-4 sm:gap-6 text-xs font-mono font-bold">
+        <div className="flex items-center gap-1.5 text-[#ed261a]">
+          <Trash2 className="w-4 h-4" />
+          <span>RECOGIDAS: <strong className="text-[#450a0a]">{score}</strong></span>
         </div>
-        <div className="flex items-center gap-1.5 text-orange-400">
-          <Sparkles className="w-3.5 h-3.5" />
-          <span>ECO: <strong className="text-white">{ecoPoints}</strong></span>
+        <div className="flex items-center gap-1.5 text-[#991b1b]">
+          <Sparkles className="w-4 h-4" />
+          <span>ECO: <strong className="text-[#450a0a]">{ecoPoints}</strong></span>
         </div>
       </div>
 
+      {/* Botón de Demostración */}
       <a 
         href="#persecucion"
-        className="hidden sm:block bg-[#ed261a] hover:bg-[#ff382b] text-white font-bold px-4 py-2 rounded-lg text-xs shadow-md shadow-red-600/20 transition"
+        className="hidden sm:inline-flex items-center justify-center bg-[#ed261a] hover:bg-[#991b1b] text-white font-bold px-5 py-2 rounded-lg text-xs transition shadow-sm"
       >
         PROBAR DEMOSTRACIÓN
       </a>
