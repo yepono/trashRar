@@ -70,27 +70,31 @@ export const TrashCan3DViewer = () => {
   return (
     <section id="anatomia" ref={sectionRef} className="py-24 px-6 max-w-7xl mx-auto relative min-h-[900px]">
       <div className="text-center mb-12">
-        <span className="bg-red-500/10 text-red-400 border border-red-500/30 px-4 py-1.5 rounded-full text-xs font-semibold uppercase tracking-wider">Desglose de hardware</span>
-        <h2 className="text-3xl md:text-5xl font-black text-white mt-5 mb-4">Anatomía de un trashHunter</h2>
-        <p className="text-slate-400 max-w-xl mx-auto">Inspecciona el hardware inteligente que compone nuestro bote de basura autónomo.</p>
+        <span className="bg-[#fee2e2] text-[#ed261a] border border-red-200 px-4 py-1.5 rounded-full text-xs font-bold uppercase tracking-wider">
+          Desglose de hardware
+        </span>
+        <h2 className="text-3xl md:text-5xl font-black text-[#ed261a] mt-5 mb-4">
+          Anatomía de un trashRar
+        </h2>
+        <p className="text-[#991b1b] max-w-xl mx-auto font-medium">
+          Inspecciona el hardware inteligente que compone nuestro bote de basura autónomo.
+        </p>
       </div>
 
-      <div className="sticky top-28 h-[560px] w-full max-w-4xl mx-auto bg-slate-900/80 border border-red-500/30 rounded-3xl relative overflow-hidden shadow-2xl">
-        {/* Resplandor radial detrás del modelo 3D en tono rojo */}
-        <div className="absolute inset-0 pointer-events-none bg-[radial-gradient(circle_at_center,rgba(237,38,26,0.15),transparent_54%)]" />
+      <div className="sticky top-28 h-[560px] w-full max-w-4xl mx-auto bg-white border-2 border-red-200 rounded-3xl relative overflow-hidden shadow-md">
         <div
           className="absolute inset-0 transition-[transform,opacity] duration-100 ease-out"
           style={{ opacity: revealProgress, transform: `translateY(${(1 - revealProgress) * 170}px) scale(${0.7 + revealProgress * 0.3})` }}
         >
-        <Canvas camera={{ position: [0, 2, 6], fov: 50 }}>
-          <ambientLight intensity={1.2} />
-          <directionalLight position={[10, 20, 15]} intensity={1.5} />
-          <pointLight position={[-10, -10, -10]} intensity={0.5} />
-          <React.Suspense fallback={<FallbackBin />}>
-            <Model />
-          </React.Suspense>
-          <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={1} />
-        </Canvas>
+          <Canvas camera={{ position: [0, 2, 6], fov: 50 }}>
+            <ambientLight intensity={1.5} />
+            <directionalLight position={[10, 20, 15]} intensity={1.8} />
+            <pointLight position={[-10, -10, -10]} intensity={0.5} />
+            <React.Suspense fallback={<FallbackBin />}>
+              <Model />
+            </React.Suspense>
+            <OrbitControls enableZoom={false} autoRotate autoRotateSpeed={1} />
+          </Canvas>
         </div>
 
         {/* Hotspots interactivos sobre el Canvas */}
@@ -99,19 +103,21 @@ export const TrashCan3DViewer = () => {
             <button
               aria-label={`Inspeccionar ${spot.title}`}
               onClick={() => setActiveHotspot(activeHotspot === spot.id ? null : spot.id)}
-              className="bg-[#ed261a] text-white p-3 rounded-full shadow-lg shadow-red-600/40 hover:scale-110 transition flex items-center justify-center font-bold"
+              className="bg-[#ed261a] text-white p-3 rounded-full shadow-md hover:scale-110 hover:bg-[#991b1b] transition flex items-center justify-center font-bold"
             >
               {spot.icon}
             </button>
             {activeHotspot === spot.id && (
-              <div className={`absolute z-20 w-56 max-w-[calc(100vw-3rem)] bg-slate-950/95 border border-red-500/40 p-4 rounded-xl shadow-2xl backdrop-blur text-left ${spot.id === 2 ? 'top-0 right-14' : spot.id === 3 ? 'bottom-14 left-0' : 'top-14 left-0'}`}>
-                <h4 className="text-white font-bold text-sm mb-1">{spot.title}</h4>
-                <p className="text-slate-300 text-xs">{spot.desc}</p>
+              <div className={`absolute z-20 w-56 max-w-[calc(100vw-3rem)] bg-white border-2 border-[#ed261a] p-4 rounded-xl shadow-lg text-left ${spot.id === 2 ? 'top-0 right-14' : spot.id === 3 ? 'bottom-14 left-0' : 'top-14 left-0'}`}>
+                <h4 className="text-[#ed261a] font-bold text-sm mb-1">{spot.title}</h4>
+                <p className="text-[#450a0a] text-xs font-medium">{spot.desc}</p>
               </div>
             )}
           </div>
         ))}
-        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-center text-[10px] uppercase tracking-[0.18em] text-red-500/70">Desplázate para revelar el modelo · Haz clic en los nodos</div>
+        <div className="absolute bottom-5 left-1/2 -translate-x-1/2 text-center text-[10px] uppercase tracking-[0.18em] text-[#991b1b] font-bold">
+          Desplázate para revelar el modelo · Haz clic en los nodos
+        </div>
       </div>
     </section>
   );

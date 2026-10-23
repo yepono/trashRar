@@ -5,9 +5,6 @@ export const HeroSection = () => {
   return (
     <section id="problema" className="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-28 pb-16 relative">
       <div className="relative z-10 max-w-4xl">
-        <span className="inline-flex items-center gap-2 bg-[#fee2e2] text-[#ed261a] border border-red-200 px-4 py-2 rounded-full text-xs font-bold mb-6">
-          <Sparkles className="w-4 h-4" /> Saneamiento público autónomo de nueva generación
-        </span>
         
         <h1 className="text-5xl md:text-7xl font-black leading-[0.95] tracking-tight text-[#ed261a] mt-4 mb-6">
           La basura no debería buscar el bote...<br />
