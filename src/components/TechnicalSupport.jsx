@@ -31,7 +31,7 @@ export const TechnicalSupport = () => {
             <LifeBuoy className="w-6 h-6" />
           </div>
           <h3 className="text-lg font-bold text-[#820000] mb-2">Soporte especializado</h3>
-          <p className="text-[#b51414] text-sm">Diagnóstico remoto y reemplazo en sitio en menos de 4 horas.</p>
+          <p className="text-[#b51414] text-sm">Diagnóstico remoto y reemplazo en sitio en menos de 24 horas.</p>
         </div>
       </div>
 

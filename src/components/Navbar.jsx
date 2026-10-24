@@ -1,5 +1,6 @@
 import { Sparkles, Trash2 } from 'lucide-react';
 import { useTrashStore } from '../store/useTrashStore';
+import logo from '../assets/logo_sin_fondo.png';
 
 export const Navbar = () => {
   const { score, ecoPoints } = useTrashStore();
@@ -8,8 +9,8 @@ export const Navbar = () => {
     <nav className="fixed top-0 left-0 z-50 w-full bg-[#fafafa]/95 backdrop-blur-xl border-b border-[#b51414]/20 px-6 sm:px-10 py-3.5 flex items-center justify-between shadow-[0_4px_24px_rgba(130,0,0,.08)] brand-reveal">
       {/* Contenedor del Logo y Eslogan */}
       <div className="flex items-center space-x-3">
-        <div className="bg-[#820000] p-2 rounded-lg text-[#fafafa] brand-pulse">
-          <Trash2 className="w-5 h-5" />
+        <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-[#fafafa] brand-pulse">
+          <img src={logo} alt="Logo de trashRar" className="h-8 w-8 object-contain" />
         </div>
         <div>
           <span className="text-xl font-black tracking-wider text-[#820000] block leading-none">
@@ -22,24 +23,7 @@ export const Navbar = () => {
       </div>
 
       {/* Métricas e Indicadores en tiempo real */}
-      <div className="flex items-center gap-4 sm:gap-6 text-xs font-mono font-bold">
-        <div className="flex items-center gap-1.5 text-[#e51010]">
-          <Trash2 className="w-4 h-4" />
-          <span>RECOGIDAS: <strong className="text-[#820000]">{score}</strong></span>
-        </div>
-        <div className="flex items-center gap-1.5 text-[#e51010]">
-          <Sparkles className="w-4 h-4" />
-          <span>ECO: <strong className="text-[#820000]">{ecoPoints}</strong></span>
-        </div>
-      </div>
 
-      {/* Botón de Demostración */}
-      <a 
-        href="#persecucion"
-        className="hidden sm:inline-flex items-center justify-center bg-[#820000] hover:bg-[#b51414] text-[#fafafa] font-bold px-5 py-2 rounded-lg text-xs transition shadow-md"
-      >
-        PROBAR DEMOSTRACIÓN
-      </a>
     </nav>
   );
 };

@@ -5,6 +5,7 @@ import { InteractiveStory } from './components/InteractiveStory';
 import { FinancialImpact } from './components/FinancialImpact';
 import { TechnicalSupport } from './components/TechnicalSupport';
 import { ScrollDrivenTrashBin } from './components/ScrollDrivenTrashBin';
+import { MessageSection } from './components/MessageSection';
 
 export default function App() {
   return (
@@ -17,6 +18,7 @@ export default function App() {
         <FinancialImpact />
         <TechnicalSupport />
         <TrashCan3DViewer />
+        <MessageSection />
       </main>
       
       <footer className="py-12 px-6 text-center border-t border-[#b51414]/20 text-[#820000] text-sm bg-[#fafafa]">

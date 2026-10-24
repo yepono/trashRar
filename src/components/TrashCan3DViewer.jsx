@@ -7,7 +7,7 @@ export const TrashCan3DViewer = () => {
   const hotspots = [
     { id: 1, title: 'Detector de basura', desc: 'Detecta a personas y cúmulos de basura en un radio amplio.', icon: <Eye className="w-5 h-5"/>, pos: 'top-10 left-10' },
     { id: 2, title: 'Compresor integrado', desc: 'Reduce el volumen de los residuos mediante compresión automatizada.', icon: <Zap className="w-5 h-5"/>, pos: 'top-1/2 right-10' },
-    { id: 3, title: 'Reportes informativos', desc: 'Genera reportes de calor y estadisticas sobre los habitos de recolección dentro de la empresa.', icon: <Cpu className="w-5 h-5"/>, pos: 'bottom-10 left-1/4' },
+    { id: 3, title: 'Reportes informativos', desc: 'Genera reportes de calor y estadisticas sobre los habitos de recolección dentro de la empresa.', icon: <Cpu className="w-5 h-5"/>, pos: 'bottom-10 left-10' },
   ];
 
   return (
@@ -23,7 +23,7 @@ export const TrashCan3DViewer = () => {
       <div className="sticky top-28 h-[560px] w-full max-w-4xl mx-auto bg-[#fafafa] border-2 border-[#b51414]/30 rounded-3xl relative overflow-hidden shadow-[0_18px_50px_rgba(130,0,0,.12)] brand-reveal">
         {/* Hotspots interactivos sobre el Canvas */}
         {hotspots.map((spot) => (
-          <div key={spot.id} className={`absolute ${spot.pos} z-10`}>
+          <div key={spot.id} className={`absolute ${spot.pos} z-100`}>
             <button
               aria-label={`Inspeccionar ${spot.title}`}
               onClick={() => setActiveHotspot(activeHotspot === spot.id ? null : spot.id)}

@@ -16,16 +16,13 @@ export const FinancialImpact = () => {
           <div>
             <h3 className="text-2xl font-bold text-[#820000] mb-2">Plan Enterprise RaaS</h3>
             <p className="text-[#b51414] text-sm mb-6">Robotics as a Service para corporativos e instalaciones de alta exigencia.</p>
-            <div className="text-4xl font-black text-[#b51414] mb-6">$1,200 <span className="text-sm font-normal text-[#b51414]">USD / mes por unidad</span></div>
+            <div className="text-4xl font-black text-[#b51414] mb-6">$1,200 <span className="text-sm font-normal text-[#b51414]">USD / por unidad</span></div>
             <ul className="space-y-3 text-[#2b0909] text-sm mb-8">
               <li className="flex items-center space-x-2"><Check className="w-4 h-4 text-[#e51010]" /><span>Hardware inteligente trashRar incluido</span></li>
               <li className="flex items-center space-x-2"><Check className="w-4 h-4 text-[#e51010]" /><span>Actualizaciones de software OTA y mapa SLAM</span></li>
               <li className="flex items-center space-x-2"><Check className="w-4 h-4 text-[#e51010]" /><span>Mantenimiento preventivo e IoT Cloud Dashboard</span></li>
             </ul>
           </div>
-          <a href="#persecucion" className="w-full bg-[#b51414] hover:bg-[#e51010] text-[#fafafa] font-bold py-3 rounded-xl text-center transition shadow-md">
-            Solicitar Demostración
-          </a>
         </div>
 
         <div className="bg-[#fafafa] border border-[#b51414]/25 p-8 rounded-3xl flex flex-col justify-between shadow-[0_12px_30px_rgba(130,0,0,.08)] brand-reveal">

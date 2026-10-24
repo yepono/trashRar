@@ -67,6 +67,7 @@ export const ScrollDrivenTrashBin = () => {
     interactive: false,
     anatomyPosition: null,
     anatomyBlend: 0,
+    anatomyActive: false,
   });
 
   useEffect(() => {
@@ -77,12 +78,15 @@ export const ScrollDrivenTrashBin = () => {
 
     const updatePosition = () => {
       frameRef.current = null;
-      const scrollableHeight = document.documentElement.scrollHeight - window.innerHeight;
-      const progress = scrollableHeight > 0
-        ? Math.min(1, Math.max(0, window.scrollY / scrollableHeight))
-        : 0;
       const anatomyPanel = document.querySelector('#anatomia .brand-reveal');
+      const anatomySection = document.querySelector('#anatomia');
       const panelBounds = anatomyPanel?.getBoundingClientRect();
+      const anatomySectionTop = anatomySection
+        ? anatomySection.getBoundingClientRect().top + window.scrollY
+        : null;
+      const progress = anatomySectionTop > 0
+        ? Math.min(1, Math.max(0, window.scrollY / anatomySectionTop))
+        : 0;
       const anatomyVisible = panelBounds
         && panelBounds.bottom > window.innerHeight * 0.2
         && panelBounds.top < window.innerHeight * 0.8;
@@ -91,19 +95,18 @@ export const ScrollDrivenTrashBin = () => {
       const anatomyTarget = panelBounds
         ? {
           x: panelBounds.left + panelBounds.width / 2,
-          y: Math.min(
-            window.innerHeight * 0.62,
-            Math.max(window.innerHeight * 0.38, panelBounds.top + panelBounds.height / 2),
-          ),
+          y: panelBounds.top + panelBounds.height / 2,
         }
         : null;
+      const anatomyActive = Boolean(anatomyTarget && easedAnatomyBlend > 0.9);
 
       setMotion((current) => ({
         ...current,
         progress,
-        interactive: Boolean(anatomyVisible && easedAnatomyBlend > 0.9),
+        interactive: Boolean(anatomyVisible && anatomyActive),
         anatomyBlend: easedAnatomyBlend,
         anatomyPosition: anatomyTarget,
+        anatomyActive,
       }));
     };
 
@@ -139,8 +142,12 @@ export const ScrollDrivenTrashBin = () => {
   };
   const anatomyPosition = motion.anatomyPosition || freePosition;
   const blendedPosition = {
-    x: freePosition.x + (anatomyPosition.x - freePosition.x) * motion.anatomyBlend,
-    y: freePosition.y + (anatomyPosition.y - freePosition.y) * motion.anatomyBlend,
+    x: motion.anatomyActive
+      ? anatomyPosition.x
+      : freePosition.x + (anatomyPosition.x - freePosition.x) * motion.anatomyBlend,
+    y: motion.anatomyActive
+      ? anatomyPosition.y
+      : freePosition.y + (anatomyPosition.y - freePosition.y) * motion.anatomyBlend,
   };
   const positionStyle = {
     left: `${blendedPosition.x}px`,

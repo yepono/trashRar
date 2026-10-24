@@ -1,12 +1,20 @@
 import { AlertTriangle, DollarSign, TrendingDown } from 'lucide-react';
 
 export const HeroSection = () => {
+  const title = 'El futuro de la limpieza te sigue';
+
   return (
     <section id="problema" className="min-h-screen flex flex-col items-center justify-center text-center px-6 pt-28 pb-16 relative bg-[#fafafa]">
-      <div className="relative z-10 max-w-4xl">
+      <div className="relative z-10 w-full max-w-7xl">
         
-        <h1 className="text-5xl md:text-7xl font-black leading-[0.95] tracking-tight text-[#820000] mt-4 mb-6 brand-reveal">
-          Frase de gancho
+        <h1 className="hero-title mt-4 mb-6 font-black leading-[0.88] tracking-[-0.06em] brand-reveal" aria-label={title}>
+          {title.split(' ').map((word) => {
+            return (
+              <span key={word} className="hero-title__word">
+                {word}
+              </span>
+            );
+          })}
         </h1>
         
       </div>

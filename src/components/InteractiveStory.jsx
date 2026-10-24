@@ -113,20 +113,7 @@ export const InteractiveStory = () => {
       </div>
 
       {/* Caja de Estado */}
-      <div className="editorial-playground max-w-2xl text-left bg-[#fafafa] border-2 border-[#b51414] rounded-3xl p-8 shadow-[0_16px_40px_rgba(130,0,0,.1)] brand-pulse">
-        <Sparkles className="w-8 h-8 text-[#e51010] mx-auto mb-4" />
-        <p className="text-[#820000] text-xl font-mono font-bold uppercase tracking-widest mb-3">PLAYGROUND</p>
-        <p className="text-[#b51414] text-sm leading-relaxed">
-          {isChasing
-            ? 'Haz clic en cualquier espacio para dejar basura y después haz clic sobre cada montículo para recogerlo.'
-            : 'Desplázate hasta esta sección para activar el playground.'}
-        </p>
-        {isChasing && trashItems.length > 0 && (
-          <p className="mt-4 text-[#e51010] text-xs font-black uppercase tracking-[0.16em]">
-            Residuos pendientes: {trashItems.length}
-          </p>
-        )}
-      </div>
+
     </section>
   );
 };
